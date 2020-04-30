@@ -6,21 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>移动端rem布局计算方法 | zhc的博客</title>
+  <title>测试 | zhc的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="rem计算方法">
-<meta property="og:type" content="article">
-<meta property="og:title" content="移动端rem布局计算方法">
-<meta property="og:url" content="http://yoursite.com/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="测试">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="zhc的博客">
-<meta property="og:description" content="rem计算方法">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-29T14:03:34.000Z">
-<meta property="article:modified_time" content="2020-04-29T14:14:50.823Z">
+<meta property="article:published_time" content="2020-04-30T02:57:02.000Z">
+<meta property="article:modified_time" content="2020-04-30T02:57:02.746Z">
 <meta property="article:author" content="super-zheng">
-<meta property="article:tag" content="css">
-<meta property="article:tag" content="rem布局">
-<meta property="article:tag" content="移动端">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zhc的博客" type="application/atom+xml">
@@ -167,41 +162,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-移动端rem布局计算方法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-测试" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      移动端rem布局计算方法
+      测试
     </h1>
   
 
         
-        <a href="/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-04-29T14:03:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
+        <a href="/2020/04/30/%E6%B5%8B%E8%AF%95/" class="archive-article-date">
+  	<time datetime="2020-04-30T02:57:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>rem计算方法</em></p>
-<a id="more"></a>
-
-<h3 id="一、第一种方式"><a href="#一、第一种方式" class="headerlink" title="一、第一种方式"></a>一、第一种方式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//得到手机屏幕的宽度</span></span><br><span class="line"><span class="keyword">let</span> htmlWidth = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth;</span><br><span class="line"><span class="comment">//得到html的Dom元素</span></span><br><span class="line"><span class="keyword">let</span> htmlDom = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'html'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//设置根元素字体大小</span></span><br><span class="line">htmlDom.style.fontSize = htmlWidth / <span class="number">7.5</span> + <span class="string">'px'</span>;          <span class="comment">//7.5是设计稿的宽度除以100得到的 为了好算</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onresize=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">//得到手机屏幕的宽度</span></span><br><span class="line"><span class="keyword">let</span> htmlWidth = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth;</span><br><span class="line"><span class="comment">//得到html的Dom元素</span></span><br><span class="line"><span class="keyword">let</span> htmlDom = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'html'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//设置根元素字体大小</span></span><br><span class="line">htmlDom.style.fontSize = htmlWidth / <span class="number">7.5</span> + <span class="string">'px'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h3 id="二、第二种方式"><a href="#二、第二种方式" class="headerlink" title="二、第二种方式"></a>二、第二种方式</h3><p>先设置</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">html &#123;</span><br><span class="line">  font-size: 100px; /*750PX设计稿尺寸中：1REM=100PX*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--REM--&gt;    </span><br><span class="line">       </span><br><span class="line"><span class="comment">//=&gt;根据当前设备的宽度,动态计算出REM的换算比例,实现页面中元素的等比缩放       </span></span><br><span class="line"> ~<span class="function"><span class="keyword">function</span> <span class="title">anonymous</span>(<span class="params">window</span>) </span>&#123;           </span><br><span class="line">      <span class="keyword">let</span> computedREM = <span class="function"><span class="keyword">function</span> <span class="title">computedREM</span>(<span class="params"></span>) </span>&#123;               </span><br><span class="line">           <span class="keyword">let</span> winW = <span class="built_in">document</span>.documentElement.clientWidth,                    </span><br><span class="line">           desW = <span class="number">750</span>;                </span><br><span class="line">           <span class="keyword">if</span> (winW &gt;= <span class="number">750</span>) &#123;                    </span><br><span class="line">               <span class="built_in">document</span>.documentElement.style.fontSize = <span class="string">'100px'</span>;                    </span><br><span class="line">               <span class="keyword">return</span>;                </span><br><span class="line">               &#125;                </span><br><span class="line">           <span class="built_in">document</span>.documentElement.style.fontSize = winW / desW * <span class="number">100</span> + <span class="string">'px'</span>;            </span><br><span class="line">           &#125;;            </span><br><span class="line">           computedREM();            </span><br><span class="line">           <span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, computedREM);        </span><br><span class="line">    &#125;(<span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
-<br>
-
-<p><strong><em>一般推荐用第二种方法</em></strong></p>
-
+        
       
 
       
@@ -240,25 +221,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">rem布局</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">移动端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -309,7 +271,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/30/%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -323,18 +285,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/30/%E6%B5%8B%E8%AF%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          测试
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">css 的样式穿透</div>
+    <a href="/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">移动端rem布局计算方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -361,7 +314,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、第一种方式"><span class="toc-number">1.</span> <span class="toc-text">一、第一种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、第二种方式"><span class="toc-number">2.</span> <span class="toc-text">二、第二种方式</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
