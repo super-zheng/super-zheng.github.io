@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>测试 | zhc的博客</title>
+  <title>详解vue组件的keep-alive | zhc的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://yoursite.com/2020/04/30/%E6%B5%8B%E8%AF%95/index.html">
+  <meta name="description" content="详解keep-alive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解vue组件的keep-alive">
+<meta property="og:url" content="http://yoursite.com/2020/05/01/%E8%AF%A6%E8%A7%A3vue%E7%BB%84%E4%BB%B6%E7%9A%84keep-alive/index.html">
 <meta property="og:site_name" content="zhc的博客">
+<meta property="og:description" content="详解keep-alive">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-30T03:06:08.000Z">
-<meta property="article:modified_time" content="2020-04-30T03:06:08.207Z">
-<meta property="article:author" content="super-zheng">
+<meta property="article:published_time" content="2020-05-01T10:53:26.000Z">
+<meta property="article:modified_time" content="2020-05-01T11:22:00.205Z">
+<meta property="article:author" content="前端小火">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="keep-alive">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zhc的博客" type="application/atom+xml">
@@ -48,7 +52,7 @@
 			<img src="/assets/avatar.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">super-zheng</a></h1>
+		  <h1 class="header-author"><a href="/">前端小火</a></h1>
 		</hgroup>
 		
 		<p class="header-subtitle">革命尚未成功，搬砖仍需努力</p>
@@ -110,7 +114,7 @@
 				<img src="/assets/avatar.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">super-zheng</h1>
+			  <h1 class="header-author js-header-author">前端小火</h1>
 			</hgroup>
 			
 			<p class="header-subtitle"><i class="icon icon-quo-left"></i>革命尚未成功，搬砖仍需努力<i class="icon icon-quo-right"></i></p>
@@ -162,27 +166,82 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-测试" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-详解vue组件的keep-alive" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      测试
+      详解vue组件的keep-alive
     </h1>
   
 
         
-        <a href="/2020/04/30/%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2020-04-30T03:06:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
+        <a href="/2020/05/01/%E8%AF%A6%E8%A7%A3vue%E7%BB%84%E4%BB%B6%E7%9A%84keep-alive/" class="archive-article-date">
+  	<time datetime="2020-05-01T10:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p><em>详解keep-alive</em></p>
+<a id="more"></a>
+<p>有时候我们不希望组件被重新渲染影响使用体验；或者处于性能考虑，避免多次重复渲染降低性能。而是希望组件可以缓存下来,维持当前的状态。这时候就可以用到keep-alive组件。</p>
+<blockquote>
+<p>官网解释：<keep-alive> 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。和 <transition> 相似，<keep-alive> 是一个抽象组件：它自身不会渲染一个 DOM 元素，也不会出现在父组件链中。 当组件在 <keep-alive> 内被切换，它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行。 在 2.2.0 及其更高版本中，activated 和 deactivated 将会在 <keep-alive> 树内的所有嵌套组件中触发。 主要用于保留组件状态或避免重新渲染</p>
+</blockquote>
+<br>
+
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p>如果未使用keep-alive组件，则在页面回退时仍然会重新渲染页面，触发created钩子，使用体验不好。 在以下场景中使用keep-alive组件会显著提高用户体验，菜单存在多级关系，多见于列表页+详情页的场景如：</p>
+<blockquote>
+<ul>
+<li>商品列表页点击商品跳转到商品详情，返回后仍显示原有信息</li>
+<li>订单列表跳转到订单详情，返回，等等场景。</li>
+</ul>
+</blockquote>
+<h3 id="keep-alive的生命周期"><a href="#keep-alive的生命周期" class="headerlink" title="keep-alive的生命周期"></a>keep-alive的生命周期</h3><blockquote>
+<ul>
+<li>　　使用<keep-alive>会将数据保留在内存中，如果要在每次进入页面的时候获取最新的数据，需要在activated阶段获取数据，承担原来created钩子中获取数据的任务。</li>
+<li>被包含在 <keep-alive> 中创建的组件，会多出两个生命周期的钩子: activated 与 deactivated<blockquote>
+<ul>
+<li>activated：在组件被激活时调用，在组件第一次渲染时也会被调用，之后每次keep-alive激活时被调用。</li>
+<li>deactivated：在组件被停用时调用。<br>　注意：只有组件被 keep-alive 包裹时，这两个生命周期才会被调用，如果作为正常组件使用，是不会被调用，以及在 2.1.0 版本之后，使用 exclude 排除之后，就算被包裹在 keep-alive 中，这两个钩子依然不会被调用！另外在服务端渲染时此钩子也不会被调用的。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p>什么时候获取数据？</p>
+<blockquote>
+<ul>
+<li>当引入keep-alive 的时候，页面第一次进入，钩子的触发顺序created-&gt; mounted-&gt; activated，退出时触发deactivated。当再次进入（前进或者后退）时，只触发activated。</li>
+<li>我们知道 keep-alive 之后页面模板第一次初始化解析变成HTML片段后，再次进入就不在重新解析而是读取内存中的数据，即，只有当数据变化时，才使用VirtualDOM进行diff更新。故，页面进入的数据获取应该在activated中也放一份。数据下载完毕手动操作DOM的部分也应该在activated中执行才会生效。</li>
+<li>所以，应该activated中留一份数据获取的代码，或者不要created部分，直接将created中的代码转移到activated中。</li>
+</ul>
+</blockquote>
+<p>　</p>
+<h3 id="项目实践"><a href="#项目实践" class="headerlink" title="项目实践"></a>项目实践</h3><h4 id="1-更改App-vue"><a href="#1-更改App-vue" class="headerlink" title="1.更改App.vue"></a>1.更改App.vue</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span> <span class="attr">class</span>=<span class="string">'wrapper'</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 需要缓存的视图组件 路由配置中meta属性keepAlive为true则表示需要缓存--&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">v-if</span>=<span class="string">"$route.meta.keepAlive"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 不需要缓存的视图组件 --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">router-view</span> <span class="attr">v-if</span>=<span class="string">"!$route.meta.keepAlive"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-在路由中设置keepAlive"><a href="#2-在路由中设置keepAlive" class="headerlink" title="2.在路由中设置keepAlive"></a>2.在路由中设置keepAlive</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'list'</span>,</span><br><span class="line">  name: <span class="string">'itemList'</span>, <span class="comment">// 商品管理</span></span><br><span class="line">  component (resolve) &#123;</span><br><span class="line">    <span class="built_in">require</span>([<span class="string">'@/pages/item/list'</span>], resolve)</span><br><span class="line"> &#125;,</span><br><span class="line"> meta: &#123;</span><br><span class="line">  keepAlive: <span class="literal">true</span>,</span><br><span class="line">  title: <span class="string">'商品管理'</span></span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="keep-alive的参数"><a href="#keep-alive的参数" class="headerlink" title="keep-alive的参数"></a>keep-alive的参数</h3><blockquote>
+<ul>
+<li>include: 字符串或正则表达式。只有匹配的组件会被缓存。</li>
+<li>exclude: 字符串或正则表达式。任何匹配的组件都不会被缓存。</li>
+</ul>
+</blockquote>
+<p>exclude优先级大于include</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">include</span>=<span class="string">"test-keep-alive"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 将缓存name为test-keep-alive的组件 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">component</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">include</span>=<span class="string">"a,b"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 将缓存name为a或者b的组件，结合动态组件使用 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"view"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 使用正则表达式，需使用v-bind --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">:include</span>=<span class="string">"/a|b/"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">component</span> <span class="attr">:is</span>=<span class="string">"view"</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 动态判断 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">:include</span>=<span class="string">"includedComponents"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">keep-alive</span> <span class="attr">exclude</span>=<span class="string">"test-keep-alive"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 将不缓存name为test-keep-alive的组件 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">component</span>&gt;</span><span class="tag">&lt;/<span class="name">component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="根据keep-alive记录上个页面滚动条的位置"><a href="#根据keep-alive记录上个页面滚动条的位置" class="headerlink" title="根据keep-alive记录上个页面滚动条的位置"></a>根据keep-alive记录上个页面滚动条的位置</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">     </span><br><span class="line">      homeTop : <span class="number">0</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">activated()&#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'activated home'</span>)</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).scrollTop = <span class="keyword">this</span>.homeTop || <span class="number">0</span></span><br><span class="line">&#125;,</span><br><span class="line">beforeRouteLeave (to, <span class="keyword">from</span>, next) &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'leave'</span>)</span><br><span class="line">    <span class="keyword">let</span> app = <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>)</span><br><span class="line">    <span class="keyword">this</span>.homeTop = app.scrollTop || <span class="number">0</span></span><br><span class="line">    next()</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>文章推荐: <a href="https://www.cnblogs.com/goloving/p/9256212.html" target="_blank" rel="noopener">Deployment</a></p>
+
       
 
       
@@ -221,6 +280,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">keep-alive</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -271,7 +345,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/30/%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/01/%E8%AF%A6%E8%A7%A3vue%E7%BB%84%E4%BB%B6%E7%9A%84keep-alive/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -314,7 +388,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#应用场景"><span class="toc-number">1.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keep-alive的生命周期"><span class="toc-number">2.</span> <span class="toc-text">keep-alive的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目实践"><span class="toc-number">3.</span> <span class="toc-text">项目实践</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-更改App-vue"><span class="toc-number">3.1.</span> <span class="toc-text">1.更改App.vue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在路由中设置keepAlive"><span class="toc-number">3.2.</span> <span class="toc-text">2.在路由中设置keepAlive</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keep-alive的参数"><span class="toc-number">4.</span> <span class="toc-text">keep-alive的参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#根据keep-alive记录上个页面滚动条的位置"><span class="toc-number">5.</span> <span class="toc-text">根据keep-alive记录上个页面滚动条的位置</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -343,7 +417,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 super-zheng
+    		&copy; 2020 前端小火
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -426,10 +500,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教学</a>
               </li>
              
@@ -438,11 +508,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">rem布局</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">移动端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">keep-alive</a>
               </li>
             
             <div class="clearfix"></div>
