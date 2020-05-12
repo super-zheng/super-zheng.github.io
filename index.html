@@ -185,41 +185,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><em>移动端的 click 事件</em></p>
-<p>在移动端，使用 click 事件存在 300MS 延迟<br><lable style='color:red;font-weight:bold'>原因：PC 端的 click 事件是点击（不是单击），dblclick 是双击 ；在移动端，浏览器把 click 事件行为定义为单击（不是点击），也就是间隔一定时间内（300MS）如果只触发一次点击，则为单击，否则则为双击</label></p>
-<ul>
-<li><p>fastclick.js 主要用来解决移动端 click 事件行为的 300MS 延迟的</p>
-<blockquote>
-<p>原理：基于事件委托，把指定容器中的 click 行为统一替换为 touch 行为，从而去解决 300MS 延迟的问题<br>使用：FastClick.attach(document.body)</p>
-</blockquote>
-</li>
-<li><p>zepto.js 移动端专用的类库（类似于 JQ 类库：JQ 怎么用，zepto 就怎么用，如果使用中报错了，说明 zepto 没有支持这种写法）</p>
-<blockquote>
-<p>1.简化版的 JQ，没有处理浏览器兼容，只实现了 JQ 中最常用的一些方法，所以体积上比 JQ 小很多<br>2.zepto 更懂移动端开发</p>
-<ul>
-<li>zepto 中的动画或者样式处理是支持 CSS3 样式和动画的处理的，而 JQ 在这方面的支持是很弱的 $xxx.css()  $xxx.animate()</li>
-<li>JQ 中的事件还是以 PC 事件体制为主，对于移动端的 touch/gesture 事件没有做进一步的封装处理，而 zepto 中单独封装了一些关于移动端操作的相关事件行为方法 $xxx.tap/singleTap/doubleTap/longTap/swipe/swipeLeft…/pinchIn/pinchOut…</li>
-</ul>
-</blockquote>
-</li>
-<li><p>hammerjs 国际通用的手势事件库</p>
-</li>
-</ul>
-<h3 id="移动端单手指操作事件模型-touch"><a href="#移动端单手指操作事件模型-touch" class="headerlink" title="移动端单手指操作事件模型 touch"></a>移动端单手指操作事件模型 touch</h3><blockquote>
-<ul>
-<li>touchstart 手指按下</li>
-<li>touchmove 手指移动</li>
-<li>touchend 手指松开</li>
-<li>touchcancel 因意外原因导致操作中断</li>
-</ul>
-</blockquote>
-<h4 id="TouchEvent"><a href="#TouchEvent" class="headerlink" title="TouchEvent"></a>TouchEvent</h4><blockquote>
-<ul>
-<li>ev.changedTouches / ev.touches 都是记录手指操作的相关信息，是一个集合，ev.changedTouches[0]记录第一根手指操作的信息</li>
-<li>touches 在 touchend 事件中是无法获取的，因为它要求手指必须在屏幕上才可以获取到对应的内容，而 changedTouches 记录的是手指改变的信息，在三个事件行为中皆可以获取到</li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">box.addEventListener(<span class="string">"touchstart"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> point = ev.changedTouches[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">this</span>.startX = point.clientX;</span><br><span class="line">  <span class="keyword">this</span>.startY = point.clientY;</span><br><span class="line">  <span class="keyword">this</span>.startL = <span class="keyword">this</span>.offsetLeft;</span><br><span class="line">  <span class="keyword">this</span>.startT = <span class="keyword">this</span>.offsetTop;</span><br><span class="line">  <span class="keyword">this</span>.isMove = <span class="literal">false</span>;</span><br><span class="line">&#125;);</span><br><span class="line">box.addEventListener(<span class="string">"touchmove"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> point = ev.changedTouches[<span class="number">0</span>];</span><br><span class="line">  <span class="comment">// 计算手指滑动的偏移差（我们会给予用户一定的操作误差，一般是10px或者30px的滑动内，都不认为是滑动操作）</span></span><br><span class="line">  <span class="keyword">this</span>.changeX = point.clientX - <span class="keyword">this</span>.startX;</span><br><span class="line">  <span class="keyword">this</span>.changeY = point.clientY - <span class="keyword">this</span>.startY;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(<span class="keyword">this</span>.changeX) &gt; <span class="number">10</span> || <span class="built_in">Math</span>.abs(<span class="keyword">this</span>.changeY) &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isMove = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">// 控制盒子跟着移动</span></span><br><span class="line">    <span class="keyword">let</span> curL = <span class="keyword">this</span>.changeX + <span class="keyword">this</span>.startL,</span><br><span class="line">      curT = <span class="keyword">this</span>.changeY + <span class="keyword">this</span>.startT;</span><br><span class="line">    <span class="keyword">this</span>.style.cssText = <span class="string">`left:<span class="subst">$&#123;curL&#125;</span>px;top:<span class="subst">$&#123;curT&#125;</span>px`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">box.addEventListener(<span class="string">"touchend"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> point = ev.changedTouches[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.isMove) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"当前操作为点击操作！"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(<span class="keyword">this</span>.changeX) &gt;= <span class="built_in">Math</span>.abs(<span class="keyword">this</span>.changeY)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.changeX &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"当前操作为滑动操作：左"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"当前操作为滑动操作：右"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.changeY &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"当前操作为滑动操作：上"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"当前操作为滑动操作：下"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 长按的区分时间：750MS</span></span><br></pre></td></tr></table></figure>
-
+        
       
 
       
@@ -965,6 +931,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">keep-alive</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教学</a>
               </li>
              
@@ -981,19 +955,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">跨域</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">继承</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">keep-alive</a>
+                <a href="javascript:void(0)" class="js-tag color3">跨域</a>
               </li>
              
               <li class="article-tag-list-item">
