@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>zhc的技术博客</title>
+  <title>Tag: touch | zhc的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="zhc的技术博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/touch/index.html">
 <meta property="og:site_name" content="zhc的技术博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="前端小火">
@@ -162,71 +162,36 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-移动端单手操作模型-touch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/12/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%8D%95%E6%89%8B%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%9E%8B-touch/">移动端单手操作模型 touch</a>
-    </h1>
-  
-
-        
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
 
 <a href="/2020/05/12/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%8D%95%E6%89%8B%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%9E%8B-touch/" class="archive-article-date">
   	<time datetime="2020-05-12T13:50:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>移动端的 click 事件</em></p>
-<p>在移动端，使用 click 事件存在 300MS 延迟<br><lable style='color:red;font-weight:bold'>原因：PC 端的 click 事件是点击（不是单击），dblclick 是双击 ；在移动端，浏览器把 click 事件行为定义为单击（不是点击），也就是间隔一定时间内（300MS）如果只触发一次点击，则为单击，否则则为双击</label></p>
-<ul>
-<li><p>fastclick.js 主要用来解决移动端 click 事件行为的 300MS 延迟的</p>
-<blockquote>
-<p>原理：基于事件委托，把指定容器中的 click 行为统一替换为 touch 行为，从而去解决 300MS 延迟的问题<br>使用：FastClick.attach(document.body)</p>
-</blockquote>
-</li>
-<li><p>zepto.js 移动端专用的类库（类似于 JQ 类库：JQ 怎么用，zepto 就怎么用，如果使用中报错了，说明 zepto 没有支持这种写法）</p>
-<blockquote>
-<p>1.简化版的 JQ，没有处理浏览器兼容，只实现了 JQ 中最常用的一些方法，所以体积上比 JQ 小很多<br>2.zepto 更懂移动端开发</p>
-<ul>
-<li>zepto 中的动画或者样式处理是支持 CSS3 样式和动画的处理的，而 JQ 在这方面的支持是很弱的 $xxx.css()  $xxx.animate()</li>
-<li>JQ 中的事件还是以 PC 事件体制为主，对于移动端的 touch/gesture 事件没有做进一步的封装处理，而 zepto 中单独封装了一些关于移动端操作的相关事件行为方法 $xxx.tap/singleTap/doubleTap/longTap/swipe/swipeLeft…/pinchIn/pinchOut…</li>
-</ul>
-</blockquote>
-</li>
-<li><p>hammerjs 国际通用的手势事件库</p>
-</li>
-</ul>
-<h3 id="移动端单手指操作事件模型-touch"><a href="#移动端单手指操作事件模型-touch" class="headerlink" title="移动端单手指操作事件模型 touch"></a>移动端单手指操作事件模型 touch</h3><blockquote>
-<ul>
-<li>touchstart 手指按下</li>
-<li>touchmove 手指移动</li>
-<li>touchend 手指松开</li>
-<li>touchcancel 因意外原因导致操作中断</li>
-</ul>
-</blockquote>
-<h4 id="TouchEvent"><a href="#TouchEvent" class="headerlink" title="TouchEvent"></a>TouchEvent</h4><blockquote>
-<ul>
-<li>ev.changedTouches / ev.touches 都是记录手指操作的相关信息，是一个集合，ev.changedTouches[0]记录第一根手指操作的信息</li>
-<li>touches 在 touchend 事件中是无法获取的，因为它要求手指必须在屏幕上才可以获取到对应的内容，而 changedTouches 记录的是手指改变的信息，在三个事件行为中皆可以获取到</li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">box.addEventListener(<span class="string">"touchstart"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> point = ev.changedTouches[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">this</span>.startX = point.clientX;</span><br><span class="line">  <span class="keyword">this</span>.startY = point.clientY;</span><br><span class="line">  <span class="keyword">this</span>.startL = <span class="keyword">this</span>.offsetLeft;</span><br><span class="line">  <span class="keyword">this</span>.startT = <span class="keyword">this</span>.offsetTop;</span><br><span class="line">  <span class="keyword">this</span>.isMove = <span class="literal">false</span>;</span><br><span class="line">&#125;);</span><br><span class="line">box.addEventListener(<span class="string">"touchmove"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> point = ev.changedTouches[<span class="number">0</span>];</span><br><span class="line">  <span class="comment">// 计算手指滑动的偏移差（我们会给予用户一定的操作误差，一般是10px或者30px的滑动内，都不认为是滑动操作）</span></span><br><span class="line">  <span class="keyword">this</span>.changeX = point.clientX - <span class="keyword">this</span>.startX;</span><br><span class="line">  <span class="keyword">this</span>.changeY = point.clientY - <span class="keyword">this</span>.startY;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(<span class="keyword">this</span>.changeX) &gt; <span class="number">10</span> || <span class="built_in">Math</span>.abs(<span class="keyword">this</span>.changeY) &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.isMove = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">// 控制盒子跟着移动</span></span><br><span class="line">    <span class="keyword">let</span> curL = <span class="keyword">this</span>.changeX + <span class="keyword">this</span>.startL,</span><br><span class="line">      curT = <span class="keyword">this</span>.changeY + <span class="keyword">this</span>.startT;</span><br><span class="line">    <span class="keyword">this</span>.style.cssText = <span class="string">`left:<span class="subst">$&#123;curL&#125;</span>px;top:<span class="subst">$&#123;curT&#125;</span>px`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">box.addEventListener(<span class="string">"touchend"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> point = ev.changedTouches[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.isMove) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"当前操作为点击操作！"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(<span class="keyword">this</span>.changeX) &gt;= <span class="built_in">Math</span>.abs(<span class="keyword">this</span>.changeY)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.changeX &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"当前操作为滑动操作：左"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"当前操作为滑动操作：右"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.changeY &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"当前操作为滑动操作：上"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"当前操作为滑动操作：下"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 长按的区分时间：750MS</span></span><br></pre></td></tr></table></figure>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/05/12/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%8D%95%E6%89%8B%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%9E%8B-touch/">移动端单手操作模型 touch</a>
+    </h1>
+  
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -242,604 +207,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/12/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%8D%95%E6%89%8B%E6%93%8D%E4%BD%9C%E6%A8%A1%E5%9E%8B-touch/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
-    <article id="post-js中的几种常用继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/12/js%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%BB%A7%E6%89%BF/">js中的几种常用继承</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2020/05/12/js%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%BB%A7%E6%89%BF/" class="archive-article-date">
-  	<time datetime="2020-05-12T10:29:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>原型继承</li>
-<li>call 继承</li>
-<li>寄生组合继承</li>
-<li>ES6 继承
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/12/js%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%BB%A7%E6%89%BF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js检测数据类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/07/js%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">js检测数据类型</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2020/05/07/js%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2020-05-07T05:02:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>typeof</li>
-<li>instanceof / constructor</li>
-<li>Object.prototype.toString.call([value]) / ({}).toString.call([value])
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据类型</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/07/js%E6%A3%80%E6%B5%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-跨域请求的处理方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/03/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/">跨域请求的处理方案</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2020/05/03/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/" class="archive-article-date">
-  	<time datetime="2020-05-03T12:41:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>跨域处理方案</em></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">跨域</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/03/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-详解vue组件的keep-alive" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/01/%E8%AF%A6%E8%A7%A3vue%E7%BB%84%E4%BB%B6%E7%9A%84keep-alive/">详解vue组件的keep-alive</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2020/05/01/%E8%AF%A6%E8%A7%A3vue%E7%BB%84%E4%BB%B6%E7%9A%84keep-alive/" class="archive-article-date">
-  	<time datetime="2020-05-01T10:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>详解keep-alive</em></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">keep-alive</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/05/01/%E8%AF%A6%E8%A7%A3vue%E7%BB%84%E4%BB%B6%E7%9A%84keep-alive/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-移动端rem布局计算方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/">移动端rem布局计算方法</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-04-29T14:03:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>rem计算方法</em></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">rem布局</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">移动端</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-css-的样式穿透" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/">css 的样式穿透</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/" class="archive-article-date">
-  	<time datetime="2020-04-29T13:53:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>有些时候改源码的样式改不动 这时候就要用到了样式穿透</em></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何用HEXO搭建自己的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/29/%E5%A6%82%E4%BD%95%E7%94%A8HEXO%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">如何用HEXO搭建自己的博客</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2020/04/29/%E5%A6%82%E4%BD%95%E7%94%A8HEXO%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-04-29T08:11:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>hexo构建属于自己的博客</em></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教学</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/29/%E5%A6%82%E4%BD%95%E7%94%A8HEXO%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
 
 
           </div>
@@ -882,10 +262,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
