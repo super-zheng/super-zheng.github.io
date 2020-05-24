@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>初学react小记 | zhc的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="初学react">
+  <meta name="description" content="初学 react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初学react小记">
 <meta property="og:url" content="http://yoursite.com/2020/05/22/%E5%88%9D%E5%AD%A6react%E5%B0%8F%E8%AE%B0/index.html">
 <meta property="og:site_name" content="zhc的技术博客">
-<meta property="og:description" content="初学react">
+<meta property="og:description" content="初学 react">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-22T02:31:31.000Z">
-<meta property="article:modified_time" content="2020-05-22T02:42:29.635Z">
+<meta property="article:modified_time" content="2020-05-24T07:47:19.702Z">
 <meta property="article:author" content="前端小菜鸟">
 <meta property="article:tag" content="react">
 <meta property="article:tag" content="mvc">
@@ -193,10 +193,53 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>初学react</em></p>
+        <p><em>初学 react</em></p>
 <a id="more"></a>
 
-<h3 id="shouldComponentUpdate生命周期"><a href="#shouldComponentUpdate生命周期" class="headerlink" title="shouldComponentUpdate生命周期"></a>shouldComponentUpdate生命周期</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps,nextState)&#123;</span><br><span class="line">    <span class="comment">//原来的属性和状态：this.props || this.state</span></span><br><span class="line">    <span class="comment">//即将要改变的新状态：nextProps || nextState</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> </span><br><span class="line">    <span class="comment">//return true表示允许更新 反之false是阻止更新(阻止的不是状态的改变，阻止的是视图是否重新渲染)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handle=<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.forceUpdate() <span class="comment">//强制更新 跳过shouldComponentUpdate这一层 直接通知视图重新渲染</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="shouldComponentUpdate-生命周期"><a href="#shouldComponentUpdate-生命周期" class="headerlink" title="shouldComponentUpdate 生命周期"></a>shouldComponentUpdate 生命周期</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps,nextState)&#123;</span><br><span class="line">    <span class="comment">//原来的属性和状态：this.props || this.state</span></span><br><span class="line">    <span class="comment">//即将要改变的新状态：nextProps || nextState</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment">//return true表示允许更新 反之false是阻止更新(阻止的不是状态的改变，阻止的是视图是否重新渲染)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handle=<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.forceUpdate() <span class="comment">//强制更新 跳过shouldComponentUpdate这一层 直接通知视图重新渲染</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="React-Hooks"><a href="#React-Hooks" class="headerlink" title="React Hooks"></a>React Hooks</h3><p>React 提供得 HOOKS 函数，目的是让“函数式组件”能拥有类似于“类组件”的一些效果</p>
+<blockquote>
+<ul>
+<li>useState 在组件中应用状态</li>
+<li>useEffect 拥有声明周期函数</li>
+<li>useRef 让其使用 DOM</li>
+<li>useReducer 让其能够像 redux 一样状态管理<br>…</li>
+</ul>
+</blockquote>
+<h4 id="useState-应用状态"><a href="#useState-应用状态" class="headerlink" title="useState:应用状态"></a>useState:应用状态</h4><blockquote>
+<ul>
+<li>@params 参数<br>initState 初始状态值（也可以是个函数，函数中返回初始状态值）</li>
+<li>@return 返回值<br>数组：[状态，更改状态的方法]</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React &#123;useState&#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">VoteHook</span>(<span class="params">props</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [supSum,changeSupNum]=useState(<span class="number">0</span>); <span class="comment">//给supSum赋值初始值0，changeSupNum方法改变supSum的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>支持人数：&#123;supSum&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">        &lt;button onClick=&#123;ev=&gt;&#123;</span><br><span class="line">            //更改状态（直接传递需要更改的值即可）；会通知组件重新渲染，类似于setState操作</span><br><span class="line">            changeSupNum(++supSum)</span><br><span class="line">        &#125;&#125;&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面只适合一个状态值，多个状态值如何管控呢？此时我们采用的是一个变量存储对象的格式来玩</p>
+<pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React &#123;useState&#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">VoteHook</span>(<span class="params">props</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [state,changeNum]=useState(&#123;</span><br><span class="line">        supNum,</span><br><span class="line">        oppNum</span><br><span class="line">    &#125;); <span class="comment">//多个状态值管控</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//也可以各自管控各自的</span></span><br><span class="line">    <span class="comment">//  let [supNum,changeSupNum]=useState(0);</span></span><br><span class="line">    <span class="comment">//  let [oppNum,changeOppNum]=useState(0);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//还可以写成函数式的：</span></span><br><span class="line">    <span class="comment">//  let [state,changeNum]=useState(function init()&#123;</span></span><br><span class="line">    <span class="comment">//      初始值写成函数的好处：</span></span><br><span class="line">    <span class="comment">//      1、可以在这里根据不同的业务场景，赋值不一样的初始值</span></span><br><span class="line">    <span class="comment">//      2、只会在第一次渲染组件的时候赋值初始值，后期组件重新渲染，当前操作不再执行，属于一个优化操作</span></span><br><span class="line">    <span class="comment">//      return &#123;</span></span><br><span class="line">    <span class="comment">//         supNum,</span></span><br><span class="line">    <span class="comment">//         oppNum</span></span><br><span class="line">    <span class="comment">//      &#125;</span></span><br><span class="line">    <span class="comment">//  &#125;);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>支持人数：&#123;state.supNum&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>反对人数：&#123;state.oppNum&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">        &lt;button onClick=&#123;ev=&gt;&#123;</span><br><span class="line">            //和setState不一样的地方，它不能实现局部状态更改，每一次更新都是把之前的值改成一个新值（稍不注意就会把之前的某个状态干没）：所以在修改之前，我们最好把之前的值克隆一份！</span><br><span class="line">            changeSupNum(&#123;</span><br><span class="line">                ...state,</span><br><span class="line">                ++supSum</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;&#125;&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><h4 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect"></a>useEffect</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React &#123;useState,useEffect&#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">VoteHook</span>(<span class="params">props</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> [supSum,changeSupNum]=useState(<span class="number">0</span>); <span class="comment">//给supSum赋值初始值0，changeSupNum方法改变supSum的值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//让其拥有周期函数</span></span><br><span class="line">  <span class="comment">//   useEffect(()=&gt;&#123;</span></span><br><span class="line">  <span class="comment">//       //compnentDidMount和componentDidUpdate</span></span><br><span class="line">  <span class="comment">//       console.log('ok')</span></span><br><span class="line">  <span class="comment">//   &#125;)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//   useEffect(()=&gt;&#123;</span></span><br><span class="line">  <span class="comment">//       //compnentDidMount</span></span><br><span class="line">  <span class="comment">//       console.log('ok')</span></span><br><span class="line">  <span class="comment">//   &#125;,[])</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//    useEffect(()=&gt;&#123;</span></span><br><span class="line">  <span class="comment">//       //指定依赖项，只有xxx更改，才会触发</span></span><br><span class="line">  <span class="comment">//       console.log('ok')</span></span><br><span class="line">  <span class="comment">//   &#125;,[supSum])</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//  useEffect(()=&gt;&#123;</span></span><br><span class="line">  <span class="comment">//       //componentDidUpdate</span></span><br><span class="line">  <span class="comment">//       return()=&gt;&#123;</span></span><br><span class="line">  <span class="comment">//            console.log('ok')</span></span><br><span class="line">  <span class="comment">//       &#125;</span></span><br><span class="line">       </span><br><span class="line">  <span class="comment">//   &#125;)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>支持人数：&#123;supSum&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">        &lt;button onClick=&#123;ev=&gt;&#123;</span><br><span class="line">             &#123;/*更改状态（直接传递需要更改的值即可）；会通知组件重新渲染，类似于setState操作*/&#125;</span><br><span class="line">            </span><br><span class="line">            changeSupNum(++supSum)</span><br><span class="line">        &#125;&#125;&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h4><pre><code class="javascript"><span class="keyword">import</span> React {useState,useRef} <span class="keyword">from</span> <span class="string">'react'</span>
+<span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">VoteHook</span>(<span class="params">props</span>)</span>{
+    <span class="keyword">let</span> [supSum,changeSupNum]=useState(<span class="number">0</span>); <span class="comment">//给supSum赋值初始值0，changeSupNum方法改变supSum的值</span>
+
+    <span class="comment">//=&gt; 让其可以进行DOM操作 </span>
+    <span class="comment">// 1.使用REF</span>
+    <span class="keyword">let</span> num = useRef()
+
+    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span>
+<span class="xml">       {/*2.想要获取哪个DOM元素就给其赋值DOM的ref属性*/}</span>
+<span class="xml">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">ref</span>=<span class="string">{num}</span>&gt;</span>支持人数：{supSum}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>
+        &lt;button onClick={ev=&gt;{
+            {/*3.基于curren属性可以获取到DOM元素*/}
+            console.log(num.curren.innerHTML)
+        }}&gt;
+          使用DOM
+<span class="xml">        <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span>
+<span class="xml">    <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span>
+}
+</code></pre>
 
       
 
@@ -344,7 +387,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#shouldComponentUpdate生命周期"><span class="toc-number">1.</span> <span class="toc-text">shouldComponentUpdate生命周期</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#shouldComponentUpdate-生命周期"><span class="toc-number">1.</span> <span class="toc-text">shouldComponentUpdate 生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Hooks"><span class="toc-number">2.</span> <span class="toc-text">React Hooks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#useState-应用状态"><span class="toc-number">2.1.</span> <span class="toc-text">useState:应用状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useEffect"><span class="toc-number">2.2.</span> <span class="toc-text">useEffect</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#useRef"><span class="toc-number">2.3.</span> <span class="toc-text">useRef</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -481,6 +524,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">rem布局</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -489,11 +540,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">rem布局</a>
+                <a href="javascript:void(0)" class="js-tag color1">touch</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">移动端</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">keep-alive</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,27 +572,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">touch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">keep-alive</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">跨域</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">mvc</a>
               </li>
             
             <div class="clearfix"></div>
