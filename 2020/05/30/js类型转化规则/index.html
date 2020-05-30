@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>css 的样式穿透 | zhc的技术博客</title>
+  <title>js类型转化规则 | zhc的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="有些时候改源码的样式改不动 这时候就要用到了样式穿透">
+  <meta name="description" content="js类型转换规则">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css 的样式穿透">
-<meta property="og:url" content="http://yoursite.com/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/index.html">
+<meta property="og:title" content="js类型转化规则">
+<meta property="og:url" content="http://yoursite.com/2020/05/30/js%E7%B1%BB%E5%9E%8B%E8%BD%AC%E5%8C%96%E8%A7%84%E5%88%99/index.html">
 <meta property="og:site_name" content="zhc的技术博客">
-<meta property="og:description" content="有些时候改源码的样式改不动 这时候就要用到了样式穿透">
+<meta property="og:description" content="js类型转换规则">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-29T13:53:27.000Z">
-<meta property="article:modified_time" content="2020-04-30T03:04:49.221Z">
+<meta property="article:published_time" content="2020-05-30T12:21:05.000Z">
+<meta property="article:modified_time" content="2020-05-30T12:34:35.234Z">
 <meta property="article:author" content="前端小菜鸟">
-<meta property="article:tag" content="css">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="类型转换">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zhc的技术博客" type="application/atom+xml">
@@ -165,14 +166,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-css-的样式穿透" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-js类型转化规则" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      css 的样式穿透
+      js类型转化规则
     </h1>
   
 
@@ -184,23 +185,26 @@
 	</span>
 
 
-<a href="/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/" class="archive-article-date">
-  	<time datetime="2020-04-29T13:53:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
+<a href="/2020/05/30/js%E7%B1%BB%E5%9E%8B%E8%BD%AC%E5%8C%96%E8%A7%84%E5%88%99/" class="archive-article-date">
+  	<time datetime="2020-05-30T12:21:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>有些时候改源码的样式改不动 这时候就要用到了样式穿透</em></p>
+        <p><em>js类型转换规则</em></p>
 <a id="more"></a>
 
-<h3 id="sass和less的样式穿透：-deep"><a href="#sass和less的样式穿透：-deep" class="headerlink" title="sass和less的样式穿透：/deep/"></a>sass和less的样式穿透：/deep/</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#father /deep/ .swiper-pagination-bullet-active &#123;</span><br><span class="line">   <span class="selector-tag">color</span>:<span class="selector-id">#fff</span>;</span><br><span class="line">   <span class="selector-tag">background</span>: <span class="selector-id">#ff51d6</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-</br>
-
-<h3 id="stylus的样式穿透：-gt-gt-gt"><a href="#stylus的样式穿透：-gt-gt-gt" class="headerlink" title="stylus的样式穿透：&gt;&gt;&gt;"></a>stylus的样式穿透：&gt;&gt;&gt;</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#father</span> &gt;&gt;&gt; <span class="selector-class">.swiper-pagination-bullet-active</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#ff51d6</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
+<blockquote>
+<ul>
+<li>NAN与任何值都不相等（包括自己）</li>
+<li>null == undefined =&gt; true  /  null === undefined =&gt; false  但是null和undefined与其他任何值都不相等</li>
+<li>对象 == 字符串 ，默认把对象转为字符串再比较（对象tostring）  </li>
+<li>剩余的情况都是转化为数字（对象转数字：Number(对象tostring())） </li>
+</ul>
+</blockquote>
+<h3 id="把其他类型转化为布尔类型遵循的规则："><a href="#把其他类型转化为布尔类型遵循的规则：" class="headerlink" title="把其他类型转化为布尔类型遵循的规则："></a>把其他类型转化为布尔类型遵循的规则：</h3><p>只有 0/null/NAN/undefined/‘’ 五个值是false ， 其余的都是true</p>
 
       
 
@@ -245,7 +249,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">类型转换</a>
         		</li>
       		
 		</ul>
@@ -301,7 +309,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/30/js%E7%B1%BB%E5%9E%8B%E8%BD%AC%E5%8C%96%E8%A7%84%E5%88%99/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -315,18 +323,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          移动端rem布局计算方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/29/%E5%A6%82%E4%BD%95%E7%94%A8HEXO%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">如何用HEXO搭建自己的博客</div>
+    <a href="/2020/05/22/%E5%88%9D%E5%AD%A6react%E5%B0%8F%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初学react小记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -353,7 +352,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#sass和less的样式穿透：-deep"><span class="toc-number">1.</span> <span class="toc-text">sass和less的样式穿透：&#x2F;deep&#x2F;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#stylus的样式穿透：-gt-gt-gt"><span class="toc-number">2.</span> <span class="toc-text">stylus的样式穿透：&gt;&gt;&gt;</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#把其他类型转化为布尔类型遵循的规则："><span class="toc-number">1.</span> <span class="toc-text">把其他类型转化为布尔类型遵循的规则：</span></a></li></ol>
                     </div>
                 </span>
             </div>
