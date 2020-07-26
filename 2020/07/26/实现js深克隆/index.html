@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: css | zhc的技术博客</title>
+  <title>实现js深克隆 | zhc的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhc的技术博客">
-<meta property="og:url" content="http://yoursite.com/tags/css/index.html">
+  <meta name="description" content="数组深度克隆">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现js深克隆">
+<meta property="og:url" content="http://yoursite.com/2020/07/26/%E5%AE%9E%E7%8E%B0js%E6%B7%B1%E5%85%8B%E9%9A%86/index.html">
 <meta property="og:site_name" content="zhc的技术博客">
+<meta property="og:description" content="数组深度克隆">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-26T05:21:56.000Z">
+<meta property="article:modified_time" content="2020-07-26T05:31:54.698Z">
 <meta property="article:author" content="前端小菜鸟">
+<meta property="article:tag" content="js">
+<meta property="article:tag" content="深克隆">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="zhc的技术博客" type="application/atom+xml">
@@ -160,150 +166,212 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-实现js深克隆" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2020/06/07/css%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%E5%B0%8F%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2020-06-07T02:30:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/07/css%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%E5%B0%8F%E8%AE%B0/">css常用属性小记</a>
+    <h1 class="article-title" itemprop="name">
+      实现js深克隆
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+
+<a href="/2020/07/26/%E5%AE%9E%E7%8E%B0js%E6%B7%B1%E5%85%8B%E9%9A%86/" class="archive-article-date">
+  	<time datetime="2020-07-26T05:21:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>数组深度克隆</em></p>
+<a id="more"></a>
+
+<h3 id="一、基于-JSON-方法，先把原始对象转换为字符串，在把字符串重新定义为对象，此时实现了内容的深度克隆"><a href="#一、基于-JSON-方法，先把原始对象转换为字符串，在把字符串重新定义为对象，此时实现了内容的深度克隆" class="headerlink" title="一、基于 JSON 方法，先把原始对象转换为字符串，在把字符串重新定义为对象，此时实现了内容的深度克隆"></a>一、基于 JSON 方法，先把原始对象转换为字符串，在把字符串重新定义为对象，此时实现了内容的深度克隆</h3><p>问题：问题：如果对象中的某一项值是正则或者函数，基于 JSON.stringify 和 JSON.parse 处理后就不在是正则（变为空对象）或者函数（变为 null）了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(arr1));</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="二、递归"><a href="#二、递归" class="headerlink" title="二、递归"></a>二、递归</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(arr1));</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_type</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_deepClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 如果是null直接返回null</span></span><br><span class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">// 如果是基本数据值或者函数，也直接返回即可（函数无需克隆处理）</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">"object"</span>) <span class="keyword">return</span> obj;</span><br><span class="line">  <span class="comment">// 如果是正则</span></span><br><span class="line">  <span class="keyword">if</span> (_type(obj) === <span class="string">"[object RegExp]"</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(obj);</span><br><span class="line">  <span class="comment">// 如果是日期格式的数据</span></span><br><span class="line">  <span class="keyword">if</span> (_type(obj) === <span class="string">"[object Date]"</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(obj);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// obj.constructor：找到的是所属类原型上的constructor，而原型上的constructor指向的是当前类本身 =&gt;保证传递进来什么类型的值，我们最后创建的newObj也是对应类型的</span></span><br><span class="line">  <span class="keyword">let</span> newObj = <span class="keyword">new</span> obj.constructor();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!obj.hasOwnProperty(key)) <span class="keyword">break</span>;</span><br><span class="line">    <span class="comment">// 如果某一项的值是引用值吗，我们还需要进一步迭代循环，把引用值中的每一项也进一步克隆 =&gt;深度克隆</span></span><br><span class="line">    newObj[key] = _deepClone(obj[key]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> newObj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr1 = [</span><br><span class="line">  <span class="number">10</span>,</span><br><span class="line">  <span class="number">20</span>,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">"珠峰培训"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  /^\d+$/,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">let</span> arr2 = _deepClone(arr1);</span><br><span class="line"><span class="built_in">console</span>.log(arr2);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj1 = &#123;</span><br><span class="line">  name: <span class="string">"珠峰"</span>,</span><br><span class="line">  ke: [<span class="string">"就业课"</span>, <span class="string">"WEB高级"</span>, <span class="string">"架构师"</span>],</span><br><span class="line">  teacher: &#123;</span><br><span class="line">    n: <span class="string">"张仁阳"</span>,</span><br><span class="line">    m: <span class="string">"周啸天"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> obj2 = _deepClone(obj1);</span><br><span class="line"><span class="built_in">console</span>.log(obj2);</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_type</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_deepClone</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 必须保证OBJ是数组或者对象等</span></span><br><span class="line">  <span class="keyword">let</span> newObj = <span class="keyword">new</span> obj.constructor();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!obj.hasOwnProperty(key)) <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">let</span> item = obj[key],</span><br><span class="line">      itemType = _type(item);</span><br><span class="line">    <span class="keyword">if</span> (item !== <span class="literal">null</span> &amp;&amp; <span class="keyword">typeof</span> item === <span class="string">"object"</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="regexp">/(RegExp|Date)/</span>.test(itemType)) &#123;</span><br><span class="line">        newObj[key] = <span class="keyword">new</span> item.constructor(item);</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 只有对象才需要深层次克隆处理</span></span><br><span class="line">      newObj[key] = _deepClone(item);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    newObj[key] = item;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> newObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝可乐<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-04-29T14:03:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/29/%E7%A7%BB%E5%8A%A8%E7%AB%AFrem%E5%B8%83%E5%B1%80%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/">移动端rem布局计算方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">移动端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">rem布局</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">深克隆</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/26/%E5%AE%9E%E7%8E%B0js%E6%B7%B1%E5%85%8B%E9%9A%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
 
-<a href="/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/" class="archive-article-date">
-  	<time datetime="2020-04-29T13:53:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
-</a>
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/13/%E8%87%AA%E5%B7%B1%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%A5%97%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">自己实现一套发布订阅</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/29/css-%E7%9A%84%E6%A0%B7%E5%BC%8F%E7%A9%BF%E9%80%8F/">css 的样式穿透</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、基于-JSON-方法，先把原始对象转换为字符串，在把字符串重新定义为对象，此时实现了内容的深度克隆"><span class="toc-number">1.</span> <span class="toc-text">一、基于 JSON 方法，先把原始对象转换为字符串，在把字符串重新定义为对象，此时实现了内容的深度克隆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、递归"><span class="toc-number">2.</span> <span class="toc-text">二、递归</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -347,9 +415,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
