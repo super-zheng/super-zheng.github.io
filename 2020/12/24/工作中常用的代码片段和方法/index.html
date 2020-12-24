@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 跨域 | zhc的技术博客</title>
+  <title>工作中常用的代码片段和方法 | zhc的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhc的技术博客">
-<meta property="og:url" content="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/index.html">
+  <meta name="description" content="常用代码片段和方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工作中常用的代码片段和方法">
+<meta property="og:url" content="http://yoursite.com/2020/12/24/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%92%8C%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="zhc的技术博客">
+<meta property="og:description" content="常用代码片段和方法">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://chuantu.xyz/t6/741/1608800429x-1404795626.png">
+<meta property="article:published_time" content="2020-12-24T07:38:55.000Z">
+<meta property="article:modified_time" content="2020-12-24T09:08:44.137Z">
 <meta property="article:author" content="我要学前端">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chuantu.xyz/t6/741/1608800429x-1404795626.png">
   
     <link rel="alternative" href="/atom.xml" title="zhc的技术博客" type="application/atom+xml">
   
@@ -160,62 +168,233 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-工作中常用的代码片段和方法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2020/05/03/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/" class="archive-article-date">
-  	<time datetime="2020-05-03T12:41:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/03/%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/">跨域请求的处理方案</a>
+    <h1 class="article-title" itemprop="name">
+      工作中常用的代码片段和方法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+
+<a href="/2020/12/24/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%92%8C%E6%96%B9%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2020-12-24T07:38:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>常用代码片段和方法</em></p>
+<a id="more"></a>
+
+<h3 id="localStorage-存取封装"><a href="#localStorage-存取封装" class="headerlink" title="localStorage 存取封装"></a>localStorage 存取封装</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//取localStorage</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getLocal = <span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> value = localStorage.getItem(key) || <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">if</span> (value.startsWith(<span class="string">"["</span>) || value.includes(<span class="string">"&#123;"</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(value);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//存localStorage</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> setLocal = <span class="function">(<span class="params">key, value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> value == <span class="string">"object"</span>) &#123;</span><br><span class="line">    value = <span class="built_in">JSON</span>.stringify(value);</span><br><span class="line">  &#125;</span><br><span class="line">  localStorage.setItem(key, value);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="对-axios-二次封装"><a href="#对-axios-二次封装" class="headerlink" title="对 axios 二次封装"></a>对 axios 二次封装</h3><blockquote>
+<p>包括跳转页面取消请求<br>包括增加请求 loading 效果以及多次请求 loding 重合问题</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">"axios"</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">"../store/index"</span>;</span><br><span class="line"><span class="comment">// 封装的目的是封装公共的拦截器 ， 每个实例有单独自己拦截器</span></span><br><span class="line"><span class="comment">// 创建一个单独的实例，每次请求都使用这个方法来创建实例</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; Loading &#125; <span class="keyword">from</span> <span class="string">"element-ui"</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">"../store/action-types"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; getLocal &#125; <span class="keyword">from</span> <span class="string">"./local"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> loadingInstance;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当页面切换时 删除不必要的请求</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Http</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.timeout = <span class="number">3000</span>; <span class="comment">// 超时时间</span></span><br><span class="line">    <span class="comment">// 开发时和生产时采用不同的前缀发送请求</span></span><br><span class="line">    <span class="keyword">this</span>.baseURL =</span><br><span class="line">      process.env.NODE_ENV == <span class="string">"development"</span></span><br><span class="line">        ? <span class="string">"http://www.fullstackjavascript.cn:8888/"</span></span><br><span class="line">        : <span class="string">"/"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.queue = &#123;&#125;; <span class="comment">// 存放所有的请求队列 /getBannerList : true</span></span><br><span class="line">  &#125;</span><br><span class="line">  mergeOptions(options) &#123;</span><br><span class="line">    <span class="comment">// 合并参数</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      timeout: <span class="keyword">this</span>.timeout,</span><br><span class="line">      baseURL: <span class="keyword">this</span>.baseURL,</span><br><span class="line">      ...options,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  setInterceptor(instance, url) &#123;</span><br><span class="line">    instance.interceptors.request.use(<span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 所有的请求都会走这轮</span></span><br><span class="line">      <span class="comment">// if(Object.keys(this.queue).length == 0)&#123;</span></span><br><span class="line">      <span class="comment">//     // 当前是所有请求中的第一个</span></span><br><span class="line">      <span class="comment">//     loadingInstance = Loading.service(&#123; fullscreen: true &#125;);</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">      <span class="comment">// this.queue[url] = true;</span></span><br><span class="line">      <span class="keyword">let</span> Cancel = axios.CancelToken;</span><br><span class="line">      config.cancelToken = <span class="keyword">new</span> Cancel(<span class="function"><span class="keyword">function</span> (<span class="params">c</span>) </span>&#123;</span><br><span class="line">        store.commit(types.SET_REQUEST_TOKEN, c);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="comment">// jwt 规范</span></span><br><span class="line">      config.headers.authorization = <span class="string">"Bearer "</span> + getLocal(<span class="string">"token"</span>);</span><br><span class="line">      <span class="keyword">return</span> config;</span><br><span class="line">    &#125;);</span><br><span class="line">    instance.interceptors.response.use(</span><br><span class="line">      (res) =&gt; &#123;</span><br><span class="line">        <span class="comment">// delete this.queue[url]; // 删除</span></span><br><span class="line">        <span class="comment">// if(Object.keys(this.queue).length == 0)&#123;</span></span><br><span class="line">        <span class="comment">//     // 当前是所有请求中的第一个</span></span><br><span class="line">        <span class="comment">//     loadingInstance.close();</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 所有的响应都会走这轮</span></span><br><span class="line">        <span class="keyword">if</span> (res.status == <span class="number">200</span>) &#123;</span><br><span class="line">          <span class="keyword">if</span> (res.data.err == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(res.data);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(res.data.data);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// 401 403 .... switch-case 去判断每个状态码代表的含义</span></span><br><span class="line">          <span class="comment">// ...</span></span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(res);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res.data;</span><br><span class="line">      &#125;,</span><br><span class="line">      (err) =&gt; &#123;</span><br><span class="line">        <span class="comment">// 失败直接返回失败的promoise</span></span><br><span class="line">        <span class="comment">// delete this.queue[url]; // 删除</span></span><br><span class="line">        <span class="comment">// if(Object.keys(this.queue).length == 0)&#123;</span></span><br><span class="line">        <span class="comment">//     // 当前是所有请求中的第一个</span></span><br><span class="line">        <span class="comment">//     loadingInstance.close();</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  request(options) &#123;</span><br><span class="line">    <span class="comment">// 用户的参数 + 默认参数 = 总共的参数</span></span><br><span class="line">    <span class="keyword">const</span> opts = <span class="keyword">this</span>.mergeOptions(options);</span><br><span class="line">    <span class="comment">// 对请求的超时，切换取消请求  , loading</span></span><br><span class="line">    <span class="keyword">const</span> axiosInstance = axios.create(); <span class="comment">// axios()</span></span><br><span class="line">    <span class="comment">// 添加拦截器</span></span><br><span class="line">    <span class="keyword">this</span>.setInterceptor(axiosInstance, opts.url);</span><br><span class="line">    <span class="comment">// 当调用axios.request 时 内部会创建一个 axios实例 并且给这个实例传入配置属性</span></span><br><span class="line">    <span class="keyword">return</span> axiosInstance(opts);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 这两个方法只是对request方法 一个简写而已</span></span><br><span class="line">  <span class="keyword">get</span>(url, config = &#123;&#125;) &#123;</span><br><span class="line">    <span class="comment">// params</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.request(&#123;</span><br><span class="line">      url,</span><br><span class="line">      method: <span class="string">"get"</span>,</span><br><span class="line">      ...config,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  post(url, data) &#123;</span><br><span class="line">    <span class="comment">// data</span></span><br><span class="line">    <span class="comment">// 对data进行格式化</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.request(&#123;</span><br><span class="line">      method: <span class="string">"post"</span>,</span><br><span class="line">      url,</span><br><span class="line">      data,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Http();</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="路由守卫拦截权限问题"><a href="#路由守卫拦截权限问题" class="headerlink" title="路由守卫拦截权限问题"></a>路由守卫拦截权限问题</h3><blockquote>
+<p>配合 vuex 和 axios 的二次封装解决跳转页面取消上个页面请求</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">"./action-types"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; getBannerList &#125; <span class="keyword">from</span> <span class="string">"@/api/public"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    <span class="comment">// 轮播图数据</span></span><br><span class="line">    bannerList: [],</span><br><span class="line">    ajaxTokens: [],</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    <span class="comment">// mutation将状态放到bannerList中</span></span><br><span class="line">    <span class="keyword">async</span> [types.SET_BANNER_LIST](state, payload) &#123;</span><br><span class="line">      state.bannerList = payload;</span><br><span class="line">    &#125;,</span><br><span class="line">    [types.SET_REQUEST_TOKEN](state, payload) &#123;</span><br><span class="line">      <span class="keyword">if</span> (payload == <span class="string">"clear"</span>) &#123;</span><br><span class="line">        state.ajaxTokens = [];</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        state.ajaxTokens = [...state.ajaxTokens, payload];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    <span class="comment">// 调用获取轮播图接口,提交到mutation中</span></span><br><span class="line">    <span class="keyword">async</span> [types.SET_BANNER_LIST](&#123; commit &#125;) &#123;</span><br><span class="line">      <span class="keyword">let</span> bannerList = <span class="keyword">await</span> getBannerList();</span><br><span class="line">      commit(types.SET_BANNER_LIST, bannerList);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>路由守卫以及模块合并</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span>;</span><br><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">"vue-router"</span>;</span><br><span class="line"><span class="keyword">import</span> hooks <span class="keyword">from</span> <span class="string">"./hooks"</span>;</span><br><span class="line">Vue.use(VueRouter);</span><br><span class="line"><span class="comment">// 每个模块有自己的路由配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取当前对应文件夹下的 所有以router.js 结尾的文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// files就是一个函数  , false 不去遍历子目录</span></span><br><span class="line"><span class="keyword">const</span> files = <span class="built_in">require</span>.context(<span class="string">"./routers"</span>, <span class="literal">false</span>, /\.router.js$/);</span><br><span class="line"><span class="keyword">const</span> routes = [];</span><br><span class="line">files.keys().forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 获取到文件的内容 拿到默认的导出结果 放到routes里 ， 如果遇到* 号 路由会将* 放到最后面</span></span><br><span class="line">  routes.push(...files(key).default);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  mode: <span class="string">"history"</span>,</span><br><span class="line">  base: process.env.BASE_URL,</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要给路由增加多个钩子 每个钩子实现一个具体功能 beforeEach next</span></span><br><span class="line"><span class="built_in">Object</span>.values(hooks).forEach(<span class="function">(<span class="params">hook</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 绑定hook中的this是路由的实例</span></span><br><span class="line">  router.beforeEach(hook.bind(router));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>路由守卫解决权限和取消请求等</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//hooks.js</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">"../store/index"</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">"../store/action-types"</span>;</span><br><span class="line"><span class="keyword">const</span> whiteList = [<span class="string">"/reg"</span>];</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// 名字是给用户看</span></span><br><span class="line">  cancelToken: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">to, from, next</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// beforeEach的方法在这里</span></span><br><span class="line">    store.state.ajaxTokens.forEach(<span class="function">(<span class="params">fn</span>) =&gt;</span> fn()); <span class="comment">//  取消上一个页面发送的请求</span></span><br><span class="line">    store.commit(types.SET_REQUEST_TOKEN, <span class="string">"clear"</span>);</span><br><span class="line">    next();</span><br><span class="line">  &#125;,</span><br><span class="line">  loginPermission: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">to, from, next</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 返回的结果 还是要存放到vuex中</span></span><br><span class="line">    <span class="comment">// whiteList  白名单</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (whiteList.includes(to.path)) &#123;</span><br><span class="line">      <span class="keyword">return</span> next();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> store.dispatch(<span class="string">`user/<span class="subst">$&#123;types.SET_USER_VALIDATE&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">if</span> (store.state.user.hasPermission) &#123;</span><br><span class="line">      <span class="keyword">if</span> (to.path === <span class="string">"/login"</span>) &#123;</span><br><span class="line">        next(<span class="string">"/"</span>); <span class="comment">// 如果去的页面是login 直接会到首页</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        next();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 看一下哪些接口允许没有权限访问</span></span><br><span class="line">      <span class="comment">// 导航鉴权</span></span><br><span class="line">      <span class="keyword">let</span> needLogin = to.matched.some(<span class="function">(<span class="params">item</span>) =&gt;</span> item.meta.needLogin);</span><br><span class="line">      <span class="keyword">if</span> (needLogin) &#123;</span><br><span class="line">        next(<span class="string">"/login"</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        next();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  menuPermission: <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">to, from, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (store.state.user.hasPermission) &#123;</span><br><span class="line">      <span class="comment">// 是否添加过路由了</span></span><br><span class="line">      <span class="comment">// 是否添加过路由了，如果已经添加过了 那应该也往下走</span></span><br><span class="line">      <span class="keyword">if</span> (!store.state.user.menuPermission) &#123;</span><br><span class="line">        <span class="comment">// 获取最新路由权限 根据用户权限来获取</span></span><br><span class="line">        store.dispatch(<span class="string">`user/<span class="subst">$&#123;types.SET_ROUTE&#125;</span>`</span>); <span class="comment">// 添加路由</span></span><br><span class="line">        next(&#123; ...to, <span class="attr">replace</span>: <span class="literal">true</span> &#125;); <span class="comment">// hack</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 已经获取过了菜单权限了， 或者页面加载完毕后</span></span><br><span class="line">        next();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="vuex-模块合并"><a href="#vuex-模块合并" class="headerlink" title="vuex 模块合并"></a>vuex 模块合并</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.js</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span>;</span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">"vuex"</span>;</span><br><span class="line"><span class="keyword">import</span> rootModule <span class="keyword">from</span> <span class="string">"./rootModule"</span>; <span class="comment">//全局vuex</span></span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模块需要划分的</span></span><br><span class="line"><span class="comment">// require.context 读取文件目录构造出我要的结构</span></span><br><span class="line"><span class="keyword">const</span> files = <span class="built_in">require</span>.context(<span class="string">"./modules"</span>, <span class="literal">false</span>, /\.js$/);</span><br><span class="line"><span class="comment">// 自动根据当前store中的模块名解析vuex中的状态</span></span><br><span class="line">files.keys().forEach(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// [./article.js,./user.js]</span></span><br><span class="line">  <span class="keyword">let</span> moduleName = key.replace(<span class="regexp">/\.\//</span>, <span class="string">""</span>).replace(<span class="regexp">/\.js/</span>, <span class="string">""</span>);</span><br><span class="line">  <span class="keyword">let</span> store = files(key).default; <span class="comment">// node语法 想获取es6的结果.default</span></span><br><span class="line">  <span class="keyword">let</span> <span class="built_in">module</span> = (rootModule.modules = rootModule.modules || &#123;&#125;);</span><br><span class="line">  <span class="built_in">module</span>[moduleName] = store;</span><br><span class="line">  <span class="comment">// 命名空间</span></span><br><span class="line">  <span class="built_in">module</span>[moduleName].namespaced = <span class="literal">true</span>; <span class="comment">// 不加空间没有作用域</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(rootModule);</span><br></pre></td></tr></table></figure>
+<p>目录结构如下<br><img src="http://chuantu.xyz/t6/741/1608800429x-1404795626.png" alt="store目录结构"></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我喝可乐<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">跨域</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/12/24/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E5%92%8C%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/12/24/Vue-router-%E8%B7%AF%E7%94%B1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vue-router 路由生命周期</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#localStorage-存取封装"><span class="toc-number">1.</span> <span class="toc-text">localStorage 存取封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对-axios-二次封装"><span class="toc-number">2.</span> <span class="toc-text">对 axios 二次封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由守卫拦截权限问题"><span class="toc-number">3.</span> <span class="toc-text">路由守卫拦截权限问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vuex-模块合并"><span class="toc-number">4.</span> <span class="toc-text">vuex 模块合并</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -259,9 +438,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
